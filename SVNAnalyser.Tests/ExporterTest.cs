@@ -16,7 +16,7 @@ namespace SVNAnalyser.Tests
             Exporter exporter = new Exporter();
             var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
 
-            var result = javaScriptSerializer.Serialize(exporter.createGraphset());
+            var result = javaScriptSerializer.Serialize(exporter.toZingChart());
 
             string expected = "{\"graphset\":[]}";
 
