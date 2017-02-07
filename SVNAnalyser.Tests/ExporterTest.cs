@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SVNAnalyser.Core;
 
 namespace SVNAnalyser.Tests
 {
@@ -10,8 +11,16 @@ namespace SVNAnalyser.Tests
     public class ExporterTest
     {
         [TestMethod]
-        public void TestMethod1()
-        {
+        public void Exporter_ShouldCreateEmptyGraphsetJSONObject()
+        {           
+            Exporter exporter = new Exporter();
+            var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+            var result = javaScriptSerializer.Serialize(exporter.createGraphset());
+
+            string expected = "{\"graphset\":[]}";
+
+            Assert.AreEqual(expected, result);
         }
     }
 }
