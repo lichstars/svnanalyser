@@ -30,9 +30,10 @@ namespace SVNAnalyser.Core
                  },
                  etc...
         */
-        public void toZingChart(string outputPath)
+        public ZingChart toZingChart(string outputPath = null)
         {
-            throw new NotImplementedException();
+            ZingChart zingchart = new ZingChart();
+            return zingchart;
         }
     }
 }
