@@ -7,10 +7,9 @@ namespace SVNAnalyser.Core
 {
     public class Exporter
     {
-
-        public ZingChart toZingChart(string outputPath = null)
+        public ZingChart.Graphset toZingChart(string outputPath = null)
         {
-            ZingChart zingchart = new ZingChart();
+            ZingChart.Graphset zingchart = new ZingChart.Graphset();
             return zingchart;
         }
     }
