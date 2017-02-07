@@ -16,4 +16,4 @@ Please use the [Issues](https://github.com/lichstars/svnanalyser/issues) page to
 
 ## License
 
-Unit Test Script Generator has been published under [MIT License](https://github.com/lichstars/svnanalyser/blob/master/LICENSE)
+SVN Analyser has been published under [MIT License](https://github.com/lichstars/svnanalyser/blob/master/LICENSE)
