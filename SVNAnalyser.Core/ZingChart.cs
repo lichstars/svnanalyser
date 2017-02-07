@@ -26,15 +26,112 @@ namespace SVNAnalyser.Core
                     "series":[{"values":[0.1],"text":"p694486"},{"values":[0.1],"text":"P695079"},{"values":[0.1],"text":"p695089"},{"values":[0.1],"text":"p696253"},{"values":[0.1],"text":"P696328"},{"values":[0.1],"text":"p696693"},{"values":[0.1],"text":"p697038"},{"values":[0.1],"text":"P697043"},{"values":[0.1],"text":"P698972"},{"values":[0.1],"text":"p699912"},{"values":[0.1],"text":"p700246"}]
                  },  
                  { "type":"pie",
-                   "plot": {"tooltip":{"text":"%t"}, "value-box" : {"font-size" : 0, "placement":"in", "text":"%t", "offsetR": "30%", "rules": [{"rule": "%v === 0","text": ""}]}},"title":{"font-size" : 10,"text":"/NavCoreServices/AusmaqImportTRTBatchProcessHandler.CLA"},"series":[{"values":[0],"text":"p694486"},{"values":[0],"text":"P695079"},{"values":[0],"text":"p695089"},{"values":[0],"text":"p696253"},{"values":[0.1],"text":"P696328"},{"values":[0],"text":"p696693"},{"values":[0.1],"text":"p697038"},{"values":[0],"text":"P697043"},{"values":[0],"text":"P698972"},{"values":[0.8],"text":"p699912"},{"values":[0],"text":"p700246"}]
+                   "plot": {
+                            "tooltip": {"text":"%t"}, 
+                            "value-box" : { "font-size" : 0, 
+                                            "placement":"in", 
+                                            "text":"%t", 
+                                            "offsetR": "30%", 
+                                            "rules": [{"rule": "%v === 0","text": ""}]
+                                          }
+                            },
+                    "title":{"font-size" : 10, "text":"/NavCoreServices/AusmaqImportTRTBatchProcessHandler.CLA"},
+                    "series":[{"values":[0],"text":"p694486"},{"values":[0],"text":"P695079"},{"values":[0],"text":"p695089"},{"values":[0],"text":"p696253"},{"values":[0.1],"text":"P696328"},{"values":[0],"text":"p696693"},{"values":[0.1],"text":"p697038"},{"values":[0],"text":"P697043"},{"values":[0],"text":"P698972"},{"values":[0.8],"text":"p699912"},{"values":[0],"text":"p700246"}]
                  },
                  etc...
         */
-        public List<string> graphset;
-
-        public ZingChart()
+        public class Graphset
         {
-            graphset = new List<string>();
+            public List<Element> graphset;
+
+            public Graphset()
+            {
+                graphset = new List<Element>();
+            }
+        }
+        public class Element
+        {
+            public string type;
+            public Plot plot;
+            public Title title;
+            public List<Series> series;
+
+            public Element()
+            {
+                this.type = "pie";
+                this.plot = new Plot();
+                this.title = new Title("");
+                this.series = new List<Series>();
+            }
+        }
+        public class Plot
+        {
+            public Tooltip tooltip;
+            public ValueBox valuebox;
+
+            public Plot()
+            {
+                this.tooltip = new Tooltip();
+                this.valuebox = new ValueBox();
+            }
+        }
+        public class Tooltip
+        {
+            public string text;
+            public Tooltip()
+            {
+                this.text = "%t";
+            }
+        }
+        public class ValueBox
+        {
+            public double fontsize;
+            public string placement;
+            public string text;
+            public string offsetR;
+            public Rules[] rules = new Rules[1];
+
+            public ValueBox()
+            {
+                fontsize = 0;
+                placement = "in";
+                text = "%t";
+                offsetR = "30%";
+                rules[0] = new Rules();
+            }
+        }
+        public class Rules
+        {
+            public string rule;
+            public string text;
+
+            public Rules()
+            {
+                rule = "%v === 0";
+                text = "";
+            }
+        }
+        public class Title
+        {
+            public string text;
+            public double fontsize;
+
+            public Title(string text)
+            {
+                this.text = text;
+                this.fontsize = 10;
+            }
+        }
+        public class Series
+        {
+            public double[] values = new double[1];
+            public string text;
+
+            public Series(double values, string text)
+            {
+                this.values[0] = values;
+                this.text = text;
+            }
         }
     }
 }
