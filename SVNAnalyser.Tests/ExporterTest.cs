@@ -11,16 +11,9 @@ namespace SVNAnalyser.Tests
     public class ExporterTest
     {
         [TestMethod]
-        public void Exporter_ShouldCreateEmptyGraphsetJSONObject()
-        {           
-            Exporter exporter = new Exporter();
-            var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-
-            var result = javaScriptSerializer.Serialize(exporter.toZingChart());
-
-            string expected = "{\"graphset\":[]}";
-
-            Assert.AreEqual(expected, result);
+        public void Exporter_ShouldExportToJson()
+        {
         }
+
     }
 }
