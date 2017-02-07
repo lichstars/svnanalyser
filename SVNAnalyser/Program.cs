@@ -10,11 +10,15 @@ namespace SVNAnalyser
     {
         static void Main(string[] args)
         {
-            string path = @"C:\\Apps\\Dev\\Code\\2017_Q1_0\\db\\stored_objects\\star_oracle\\ongoing_fees_process";
+            string svnPath = @"C:\Apps\Dev\Code\2017_Q1_0\db\stored_objects\star_oracle\ongoing_fees_process";
+            string outputPath = @"C:\Apps\SVNAnalyser\data.json";
             
             Analyser analyser = new Analyser();
+            Exporter exporter = new Exporter();
 
-			analyser.analyse(path);
+            analyser.analyse(svnPath);
+
+            exporter.toZingChart(outputPath);
 
 			Console.WriteLine("Complete. Press any key to exit.");
 
