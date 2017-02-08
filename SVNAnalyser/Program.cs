@@ -10,11 +10,12 @@ namespace SVNAnalyser
     {
         static void Main(string[] args)
         {
-            string svnPath = @"C:\Apps\Dev\Code\2017_Q1_0\db\stored_objects\star_oracle\ongoing_fees_process";
-            string outputPath = @"C:\Apps\SVNAnalyser\data.json";
-            
+            SettingsManager settingsManager = new SettingsManager();
             Analyser analyser = new Analyser();
             Exporter exporter = new Exporter();
+
+            string svnPath = settingsManager.getSVNPathToAnalyse();
+            string outputPath = @"C:\Apps\SVNAnalyser\data.json";
 
             analyser.analyse(svnPath);
 

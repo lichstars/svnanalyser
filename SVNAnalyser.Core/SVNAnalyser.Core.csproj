@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Analyser.cs" />
     <Compile Include="Exporter.cs" />
+    <Compile Include="SettingsManager.cs" />
     <Compile Include="ZingChart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
