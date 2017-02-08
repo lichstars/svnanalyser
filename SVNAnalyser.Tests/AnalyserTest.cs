@@ -10,7 +10,7 @@ namespace SVNAnalyser.Tests
     public class AnalyserTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void Analyser_Test_1()
         {
         }
     }

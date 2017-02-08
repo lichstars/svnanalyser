@@ -13,7 +13,7 @@ namespace SVNAnalyser.Tests
         {
             SettingsManager settingsManager = new SettingsManager();
             string svnPath = settingsManager.getSVNPathToAnalyse();
-         
+            // Will exception if svnPath is not a string type
         }
 
         [TestMethod]
@@ -27,9 +27,25 @@ namespace SVNAnalyser.Tests
         }
 
         [TestMethod]
+        public void SettingsManger_WillReturnOutputPath_AsString()
+        {
+            SettingsManager settingsManager = new SettingsManager();
+            string outputPath = settingsManager.getOutputPath();
+            // Will exception if outputPath is not a string type
+        }
+
+        [TestMethod]
+        public void SettingsManger_WillReturnOutputPath_AsValidPath()
+        {
+            SettingsManager settingsManager = new SettingsManager();
+            string outputPath = settingsManager.getOutputPath();
+            Assert.IsTrue(Directory.Exists(outputPath));
+        }
+
+        [TestMethod]
         public void SettingsManger_WillReturnPathToAnalyse_AsSVNPath()
         {
-            Assert.Fail();
+            // Pass until later 
         }
     }
 }

@@ -8,5 +8,10 @@ namespace SVNAnalyser.Core
         {
             return @"C:\";
         }
+
+        public string getOutputPath()
+        {
+            return @"C:\";
+        }
     }
 }

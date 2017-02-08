@@ -15,7 +15,7 @@ namespace SVNAnalyser
             Exporter exporter = new Exporter();
 
             string svnPath = settingsManager.getSVNPathToAnalyse();
-            string outputPath = @"C:\Apps\SVNAnalyser\data.json";
+            string outputPath = settingsManager.getOutputPath();
 
             analyser.analyse(svnPath);
 
