@@ -8,7 +8,6 @@ namespace SVNAnalyser.Core
     public class ZingChart
     {
         private List<Chart> charts = new List<Chart>();
-        private Chart chart = new Chart();
         /* export a json definition that is recognised by the ZingChart library
          
          * ZingChart JSON definition:
@@ -58,17 +57,12 @@ namespace SVNAnalyser.Core
             public Title title;
             public List<Series> series;
 
-            public Chart()
+            public Chart(string title = "")
             {
                 this.type = "pie";
                 this.plot = new Plot();
-                this.title = new Title("");
-                this.series = new List<Series>();
-            }
-
-            public void addTitle(string title)
-            {
                 this.title = new Title(title);
+                this.series = new List<Series>();
             }
 
             public void addSlice(double percentage, string name)
@@ -147,7 +141,6 @@ namespace SVNAnalyser.Core
                 this.text = text;
             }
         }
-
         
         public void addChart(Chart chart)
         {  

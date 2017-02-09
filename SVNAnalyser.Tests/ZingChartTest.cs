@@ -38,12 +38,8 @@ namespace SVNAnalyser.Tests
             var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             ZingChart.Graphset zingchart = new ZingChart.Graphset();
             List<ZingChart.Chart> elements = new List<ZingChart.Chart>();
-            ZingChart.Chart element = new ZingChart.Chart();
-
-            ZingChart.Title title = new ZingChart.Title("RBF.CLA");
-
-            element.title = title;
-
+            ZingChart.Chart element = new ZingChart.Chart("RBF.CLA");
+            
             elements.Add(element);
 
             zingchart.graphset = elements;
@@ -139,9 +135,7 @@ namespace SVNAnalyser.Tests
             var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             ZingChart zingchart = new ZingChart();
             ZingChart.Chart chart = new ZingChart.Chart();
-            string title = "";
 
-            chart.addTitle(title);
             zingchart.addChart(chart);
 
             var graphset = zingchart.getGraphSet();
@@ -158,10 +152,8 @@ namespace SVNAnalyser.Tests
         {
             var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             ZingChart zingchart = new ZingChart();
-            ZingChart.Chart chart = new ZingChart.Chart();
-            string title = "RBF.CLA";
+            ZingChart.Chart chart = new ZingChart.Chart("RBF.CLA");
 
-            chart.addTitle(title);
             chart.addSlice(30, "Developer 1");
             chart.addSlice(70, "Developer 2");
 
@@ -181,15 +173,15 @@ namespace SVNAnalyser.Tests
         {
             var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             ZingChart zingchart = new ZingChart();
+            string title = "RBF.CLA";
 
-            ZingChart.Chart chart = new ZingChart.Chart();
-            chart.addTitle("RBF.CLA");
+            ZingChart.Chart chart = new ZingChart.Chart(title);
             chart.addSlice(30, "Developer 1");
             chart.addSlice(70, "Developer 2");
             zingchart.addChart(chart);
 
-            chart = new ZingChart.Chart();
-            chart.addTitle("HELLO.CLA");
+            title = "HELLO.CLA";
+            chart = new ZingChart.Chart(title);
             chart.addSlice(20, "Developer 1");
             chart.addSlice(80, "Developer 2");
             zingchart.addChart(chart);
