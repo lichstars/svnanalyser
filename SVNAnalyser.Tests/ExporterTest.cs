@@ -17,20 +17,14 @@ namespace SVNAnalyser.Tests
         {
             string expected = @"{""graphset"":[{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":"""",""fontsize"":10},""series"":[]}]}";
             int expectedLength = expected.Length;
-
-
+            
             var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-            ZingChart.Graphset zingchart = new ZingChart.Graphset();
-            List<ZingChart.Chart> elements = new List<ZingChart.Chart>();
-            ZingChart.Chart element = new ZingChart.Chart();
-            elements.Add(element);
-            zingchart.graphset = elements;
-            ZingChart.Graphset graphset = zingchart;            
 
-            Exporter exporter = new Exporter();
+            Exporter exporter = new Exporter(); 
+            List<PlotData> plots = new List<PlotData>();
             string path = @"C:\Apps";
 
-            exporter.forZingChart(graphset, path);
+            exporter.asZingChart(path, plots);
 
             FileInfo f = new FileInfo(path);
             long actualLength = f.Length;
