@@ -193,6 +193,6 @@ namespace SVNAnalyser.Tests
             string expected = @"{""graphset"":[{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":""RBF.CLA"",""fontsize"":10},""series"":[{""values"":[30],""text"":""Developer 1""},{""values"":[70],""text"":""Developer 2""}]},{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":""HELLO.CLA"",""fontsize"":10},""series"":[{""values"":[20],""text"":""Developer 1""},{""values"":[80],""text"":""Developer 2""}]}]}";
 
             Assert.AreEqual(expected, result);
-        }
+        }       
     }
 }
