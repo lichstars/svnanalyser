@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyser.cs" />
+    <Compile Include="PlotData.cs" />
     <Compile Include="Exporter.cs" />
     <Compile Include="SettingsManager.cs" />
     <Compile Include="ZingChart.cs" />
