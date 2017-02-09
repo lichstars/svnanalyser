@@ -7,7 +7,6 @@ namespace SVNAnalyser.Core
 {
     public class ZingChart
     {
-        private List<Chart> charts = new List<Chart>();
         /* export a json definition that is recognised by the ZingChart library
          
          * ZingChart JSON definition:
@@ -41,6 +40,7 @@ namespace SVNAnalyser.Core
                  },
                  etc...
         */
+        private List<Chart> charts = new List<Chart>();
         public class Graphset
         {
             public List<Chart> graphset;
@@ -141,22 +141,21 @@ namespace SVNAnalyser.Core
                 this.text = text;
             }
         }
-        
+
         public void addChart(Chart chart)
         {  
             this.charts.Add(chart);
         }
-
         public List<Chart> getCharts()
         {
             return this.charts;
         }
-
         public Graphset getGraphSet()
         {
             ZingChart.Graphset graphset = new ZingChart.Graphset();
             graphset.graphset = getCharts();
             return graphset;
         }
+        
     }
 }
