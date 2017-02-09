@@ -7,10 +7,10 @@ namespace SVNAnalyser.Core
 {
     public class Exporter
     {
-        public ZingChart.Graphset toZingChart(string outputPath = null)
+        /* Create a string serialised from the argument graphset and write to a file located at argument outputPath*/
+        public void forZingChart(ZingChart.Graphset graphset, string outputPath)
         {
-            ZingChart.Graphset zingchart = new ZingChart.Graphset();
-            return zingchart;
+            throw new NotImplementedException();
         }
     }
 }
