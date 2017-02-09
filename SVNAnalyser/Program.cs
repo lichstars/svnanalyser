@@ -18,6 +18,8 @@ namespace SVNAnalyser
             string outputPath = settingsManager.getOutputPath();
 
             analyser.analyse(svnPath);
+
+            exporter.asZingChart(outputPath, null);
             
 			Console.WriteLine("Complete. Press any key to exit.");
 
