@@ -142,5 +142,40 @@ namespace SVNAnalyser.Tests
 
             Assert.AreEqual(expected, result);
         }
+        /*Should create a zingchart object via method and return expected json*/
+        [TestMethod]
+        public void ZingChart_ShouldReturnJSON_WhenMethodCalled()
+        {
+            var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            ZingChart zingchart = new ZingChart();
+
+            string title = "";
+
+            zingchart.addPieChart(title);
+
+            var result = javaScriptSerializer.Serialize(zingchart);
+
+            string expected = @"{""graphset"":[{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":"""",""fontsize"":10},""series"":[]}]}";
+
+            Assert.AreEqual(expected, result);
+        }
+        /*Should create a zingchart object via method and return expected json*/
+        [TestMethod]
+        public void ZingChart_ShouldReturnJSON_WhenMethodCalled2()
+        {
+            var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            ZingChart zingchart = new ZingChart();
+            string title = "RBF.CLA";            
+
+            zingchart.addPieChart(title);
+            zingchart.addPieChartSlice(30, "Developer 1");
+            zingchart.addPieChartSlice(70, "Developer 2");
+
+            var result = javaScriptSerializer.Serialize(zingchart);
+
+            string expected = @"{""graphset"":[{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":"""",""fontsize"":10},""series"":[{""values"":[30],""text"":""Developer 1""},{""values"":[70],""text"":""Developer 2""}]},{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":"""",""fontsize"":10},""series"":[{""values"":[30],""text"":""Developer 1""},{""values"":[70],""text"":""Developer 2""}]}]}";
+
+            Assert.AreEqual(expected, result);
+        }
     }
 }

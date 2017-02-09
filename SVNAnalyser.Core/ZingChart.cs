@@ -133,5 +133,15 @@ namespace SVNAnalyser.Core
                 this.text = text;
             }
         }
+
+        public ZingChart addPieChartSlice(double percentage, string name)
+        {
+            return this;
+        }
+
+        public ZingChart addPieChart(string title)
+        {
+            return this;
+        }
     }
 }
