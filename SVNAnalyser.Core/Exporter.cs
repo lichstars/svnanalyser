@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace SVNAnalyser.Core
 {
@@ -30,7 +31,14 @@ namespace SVNAnalyser.Core
             }
 
             ZingChart.Graphset graphset = zingchart.getGraphSet();
+            
+            var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            string result = javaScriptSerializer.Serialize(graphset);
 
+            using (StreamWriter sr = new StreamWriter(outputPath))
+            {
+                sr.WriteLine(result);
+            }
         }
 
     }
