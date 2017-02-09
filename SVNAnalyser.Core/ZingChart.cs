@@ -7,6 +7,8 @@ namespace SVNAnalyser.Core
 {
     public class ZingChart
     {
+        private List<Chart> charts = new List<Chart>();
+        private Chart chart = new Chart();
         /* export a json definition that is recognised by the ZingChart library
          
          * ZingChart JSON definition:
@@ -42,29 +44,41 @@ namespace SVNAnalyser.Core
         */
         public class Graphset
         {
-            public List<Element> graphset;
+            public List<Chart> graphset;
 
             public Graphset()
             {
-                graphset = new List<Element>();
+                graphset = new List<Chart>();
             }
         }
-        public class Element
+        public class Chart
         {
-            private string type;
-            private Plot plot;
+            public string type;
+            public Plot plot;
             public Title title;
             public List<Series> series;
 
-            public Element()
+            public Chart()
             {
                 this.type = "pie";
                 this.plot = new Plot();
                 this.title = new Title("");
                 this.series = new List<Series>();
             }
+
+            public void addTitle(string title)
+            {
+                this.title = new Title(title);
+            }
+
+            public void addSlice(double percentage, string name)
+            {
+                Series serie = new Series(percentage, name);
+
+                this.series.Add(serie);
+            }
         }
-        private class Plot
+        public class Plot
         {
             public Tooltip tooltip;
             public ValueBox valuebox;
@@ -75,7 +89,7 @@ namespace SVNAnalyser.Core
                 this.valuebox = new ValueBox();
             }
         }
-        private class Tooltip
+        public class Tooltip
         {
             public string text;
             public Tooltip()
@@ -83,7 +97,7 @@ namespace SVNAnalyser.Core
                 this.text = "%t";
             }
         }
-        private class ValueBox
+        public class ValueBox
         {
             public double fontsize;
             public string placement;
@@ -100,7 +114,7 @@ namespace SVNAnalyser.Core
                 rules[0] = new Rules();
             }
         }
-        private class Rules
+        public class Rules
         {
             public string rule;
             public string text;
@@ -134,14 +148,22 @@ namespace SVNAnalyser.Core
             }
         }
 
-        public ZingChart addPieChartSlice(double percentage, string name)
-        {
-            return this;
+        
+        public void addChart(Chart chart)
+        {  
+            this.charts.Add(chart);
         }
 
-        public ZingChart addPieChart(string title)
+        public List<Chart> getCharts()
         {
-            return this;
+            return this.charts;
+        }
+
+        public Graphset getGraphSet()
+        {
+            ZingChart.Graphset graphset = new ZingChart.Graphset();
+            graphset.graphset = getCharts();
+            return graphset;
         }
     }
 }

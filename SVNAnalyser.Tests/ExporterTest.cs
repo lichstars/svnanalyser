@@ -21,8 +21,8 @@ namespace SVNAnalyser.Tests
 
             var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             ZingChart.Graphset zingchart = new ZingChart.Graphset();
-            List<ZingChart.Element> elements = new List<ZingChart.Element>();
-            ZingChart.Element element = new ZingChart.Element();
+            List<ZingChart.Chart> elements = new List<ZingChart.Chart>();
+            ZingChart.Chart element = new ZingChart.Chart();
             elements.Add(element);
             zingchart.graphset = elements;
             ZingChart.Graphset graphset = zingchart;            

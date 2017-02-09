@@ -17,16 +17,14 @@ namespace SVNAnalyser.Tests
             var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
 
             ZingChart.Graphset zingchart = new ZingChart.Graphset();
-            List<ZingChart.Element> elements = new List<ZingChart.Element>();
-            ZingChart.Element element = new ZingChart.Element();
+            List<ZingChart.Chart> elements = new List<ZingChart.Chart>();
+            ZingChart.Chart element = new ZingChart.Chart();
 
             elements.Add(element);
 
             zingchart.graphset = elements;
 
-            ZingChart.Graphset graphset = zingchart;
-
-            var result = javaScriptSerializer.Serialize(graphset);
+            var result = javaScriptSerializer.Serialize(zingchart);
 
             string expected = @"{""graphset"":[{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":"""",""fontsize"":10},""series"":[]}]}";
 
@@ -39,8 +37,8 @@ namespace SVNAnalyser.Tests
         {
             var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             ZingChart.Graphset zingchart = new ZingChart.Graphset();
-            List<ZingChart.Element> elements = new List<ZingChart.Element>();
-            ZingChart.Element element = new ZingChart.Element();
+            List<ZingChart.Chart> elements = new List<ZingChart.Chart>();
+            ZingChart.Chart element = new ZingChart.Chart();
 
             ZingChart.Title title = new ZingChart.Title("RBF.CLA");
 
@@ -49,10 +47,8 @@ namespace SVNAnalyser.Tests
             elements.Add(element);
 
             zingchart.graphset = elements;
-
-            ZingChart.Graphset graphset = zingchart;
-
-            var result = javaScriptSerializer.Serialize(graphset);
+            
+            var result = javaScriptSerializer.Serialize(zingchart);
 
             string expected = @"{""graphset"":[{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":""RBF.CLA"",""fontsize"":10},""series"":[]}]}";
 
@@ -64,8 +60,8 @@ namespace SVNAnalyser.Tests
         {
             var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             ZingChart.Graphset zingchart = new ZingChart.Graphset();
-            List<ZingChart.Element> elements = new List<ZingChart.Element>();
-            ZingChart.Element element = new ZingChart.Element();
+            List<ZingChart.Chart> elements = new List<ZingChart.Chart>();
+            ZingChart.Chart element = new ZingChart.Chart();
 
             ZingChart.Series piechart = new ZingChart.Series(50, "Developer 1");
 
@@ -75,9 +71,7 @@ namespace SVNAnalyser.Tests
 
             zingchart.graphset = elements;
 
-            ZingChart.Graphset graphset = zingchart;
-
-            var result = javaScriptSerializer.Serialize(graphset);
+            var result = javaScriptSerializer.Serialize(zingchart);
 
             string expected = @"{""graphset"":[{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":"""",""fontsize"":10},""series"":[{""values"":[50],""text"":""Developer 1""}]}]}";
 
@@ -89,8 +83,8 @@ namespace SVNAnalyser.Tests
         {
             var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             ZingChart.Graphset zingchart = new ZingChart.Graphset();
-            List<ZingChart.Element> elements = new List<ZingChart.Element>();
-            ZingChart.Element element = new ZingChart.Element();
+            List<ZingChart.Chart> elements = new List<ZingChart.Chart>();
+            ZingChart.Chart element = new ZingChart.Chart();
 
             ZingChart.Series pieslice1 = new ZingChart.Series(30, "Developer 1");
             ZingChart.Series pieslice2 = new ZingChart.Series(70, "Developer 2");
@@ -102,9 +96,7 @@ namespace SVNAnalyser.Tests
 
             zingchart.graphset = elements;
 
-            ZingChart.Graphset graphset = zingchart;
-
-            var result = javaScriptSerializer.Serialize(graphset);
+            var result = javaScriptSerializer.Serialize(zingchart);
 
             string expected = @"{""graphset"":[{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":"""",""fontsize"":10},""series"":[{""values"":[30],""text"":""Developer 1""},{""values"":[70],""text"":""Developer 2""}]}]}";
 
@@ -116,9 +108,9 @@ namespace SVNAnalyser.Tests
         {
             var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             ZingChart.Graphset zingchart = new ZingChart.Graphset();
-            List<ZingChart.Element> elements = new List<ZingChart.Element>();
-            ZingChart.Element chart1 = new ZingChart.Element();
-            ZingChart.Element chart2 = new ZingChart.Element();
+            List<ZingChart.Chart> elements = new List<ZingChart.Chart>();
+            ZingChart.Chart chart1 = new ZingChart.Chart();
+            ZingChart.Chart chart2 = new ZingChart.Chart();
 
             ZingChart.Series pieslice1 = new ZingChart.Series(30, "Developer 1");
             ZingChart.Series pieslice2 = new ZingChart.Series(70, "Developer 2");
@@ -134,9 +126,7 @@ namespace SVNAnalyser.Tests
 
             zingchart.graphset = elements;
 
-            ZingChart.Graphset graphset = zingchart;
-
-            var result = javaScriptSerializer.Serialize(graphset);
+            var result = javaScriptSerializer.Serialize(zingchart);
 
             string expected = @"{""graphset"":[{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":"""",""fontsize"":10},""series"":[{""values"":[30],""text"":""Developer 1""},{""values"":[70],""text"":""Developer 2""}]},{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":"""",""fontsize"":10},""series"":[{""values"":[30],""text"":""Developer 1""},{""values"":[70],""text"":""Developer 2""}]}]}";
 
@@ -144,16 +134,19 @@ namespace SVNAnalyser.Tests
         }
         /*Should create a zingchart object via method and return expected json*/
         [TestMethod]
-        public void ZingChart_ShouldReturnJSON_WhenMethodCalled()
+        public void ZingChart_ShouldReturnJSON_WhenPieChartAdded()
         {
             var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             ZingChart zingchart = new ZingChart();
-
+            ZingChart.Chart chart = new ZingChart.Chart();
             string title = "";
 
-            zingchart.addPieChart(title);
+            chart.addTitle(title);
+            zingchart.addChart(chart);
 
-            var result = javaScriptSerializer.Serialize(zingchart);
+            var graphset = zingchart.getGraphSet();
+
+            var result = javaScriptSerializer.Serialize(graphset);
 
             string expected = @"{""graphset"":[{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":"""",""fontsize"":10},""series"":[]}]}";
 
@@ -161,19 +154,51 @@ namespace SVNAnalyser.Tests
         }
         /*Should create a zingchart object via method and return expected json*/
         [TestMethod]
-        public void ZingChart_ShouldReturnJSON_WhenMethodCalled2()
+        public void ZingChart_ShouldReturnJSON_WhenPieChartSlicesAdded()
         {
             var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             ZingChart zingchart = new ZingChart();
-            string title = "RBF.CLA";            
+            ZingChart.Chart chart = new ZingChart.Chart();
+            string title = "RBF.CLA";
 
-            zingchart.addPieChart(title);
-            zingchart.addPieChartSlice(30, "Developer 1");
-            zingchart.addPieChartSlice(70, "Developer 2");
+            chart.addTitle(title);
+            chart.addSlice(30, "Developer 1");
+            chart.addSlice(70, "Developer 2");
 
-            var result = javaScriptSerializer.Serialize(zingchart);
+            zingchart.addChart(chart);
 
-            string expected = @"{""graphset"":[{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":"""",""fontsize"":10},""series"":[{""values"":[30],""text"":""Developer 1""},{""values"":[70],""text"":""Developer 2""}]},{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":"""",""fontsize"":10},""series"":[{""values"":[30],""text"":""Developer 1""},{""values"":[70],""text"":""Developer 2""}]}]}";
+            var graphset = zingchart.getGraphSet();
+
+            var result = javaScriptSerializer.Serialize(graphset);
+
+            string expected = @"{""graphset"":[{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":""RBF.CLA"",""fontsize"":10},""series"":[{""values"":[30],""text"":""Developer 1""},{""values"":[70],""text"":""Developer 2""}]}]}";
+
+            Assert.AreEqual(expected, result);
+        }
+        /*Should create a zingchart object via method and return expected json*/
+        [TestMethod]
+        public void ZingChart_ShouldReturnJSON_When2PieChartsAdded()
+        {
+            var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            ZingChart zingchart = new ZingChart();
+
+            ZingChart.Chart chart = new ZingChart.Chart();
+            chart.addTitle("RBF.CLA");
+            chart.addSlice(30, "Developer 1");
+            chart.addSlice(70, "Developer 2");
+            zingchart.addChart(chart);
+
+            chart = new ZingChart.Chart();
+            chart.addTitle("HELLO.CLA");
+            chart.addSlice(20, "Developer 1");
+            chart.addSlice(80, "Developer 2");
+            zingchart.addChart(chart);
+
+            var graphset = zingchart.getGraphSet();
+
+            var result = javaScriptSerializer.Serialize(graphset);
+
+            string expected = @"{""graphset"":[{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":""RBF.CLA"",""fontsize"":10},""series"":[{""values"":[30],""text"":""Developer 1""},{""values"":[70],""text"":""Developer 2""}]},{""type"":""pie"",""plot"":{""tooltip"":{""text"":""%t""},""valuebox"":{""fontsize"":0,""placement"":""in"",""text"":""%t"",""offsetR"":""30%"",""rules"":[{""rule"":""%v === 0"",""text"":""""}]}},""title"":{""text"":""HELLO.CLA"",""fontsize"":10},""series"":[{""values"":[20],""text"":""Developer 1""},{""values"":[80],""text"":""Developer 2""}]}]}";
 
             Assert.AreEqual(expected, result);
         }
