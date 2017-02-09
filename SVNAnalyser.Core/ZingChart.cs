@@ -51,8 +51,8 @@ namespace SVNAnalyser.Core
         }
         public class Element
         {
-            public string type;
-            public Plot plot;
+            private string type;
+            private Plot plot;
             public Title title;
             public List<Series> series;
 
@@ -64,7 +64,7 @@ namespace SVNAnalyser.Core
                 this.series = new List<Series>();
             }
         }
-        public class Plot
+        private class Plot
         {
             public Tooltip tooltip;
             public ValueBox valuebox;
@@ -75,7 +75,7 @@ namespace SVNAnalyser.Core
                 this.valuebox = new ValueBox();
             }
         }
-        public class Tooltip
+        private class Tooltip
         {
             public string text;
             public Tooltip()
@@ -83,7 +83,7 @@ namespace SVNAnalyser.Core
                 this.text = "%t";
             }
         }
-        public class ValueBox
+        private class ValueBox
         {
             public double fontsize;
             public string placement;
@@ -100,7 +100,7 @@ namespace SVNAnalyser.Core
                 rules[0] = new Rules();
             }
         }
-        public class Rules
+        private class Rules
         {
             public string rule;
             public string text;
