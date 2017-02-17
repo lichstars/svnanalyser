@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+
 
 namespace SVNAnalyser.Core
 {
@@ -6,12 +8,20 @@ namespace SVNAnalyser.Core
     {
         public string getSVNPathToAnalyse()
         {
-            return @"C:\";
+			string svnPath = @"C:\";
+			if ((Directory.Exists(svnPath)) || File.Exists(svnPath))
+				return svnPath;
+			else
+				throw new FileNotFoundException();
         }
 
         public string getOutputPath()
         {
-            return @"C:\";
+			string outputPath = @"C:\";
+			if ((Directory.Exists(outputPath)))
+				return outputPath;
+			else
+				throw new FileNotFoundException();
         }
     }
 }
