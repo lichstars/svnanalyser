@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -56,6 +57,10 @@
     <ProjectReference Include="..\SVNAnalyser.Core\SVNAnalyser.Core.csproj">
       <Project>{55788C1D-877C-42A4-BBA4-A742172E7170}</Project>
       <Name>SVNAnalyser.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SVNAnalyser\SVNAnalyser.csproj">
+      <Project>{070b2cfb-be54-41d7-95cd-495e29c9d66b}</Project>
+      <Name>SVNAnalyser</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

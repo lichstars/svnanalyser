@@ -1,27 +1,69 @@
 ﻿using System;
 using System.IO;
-
+using System.Configuration;
 
 namespace SVNAnalyser.Core
 {
+
+    public class NotSVNExecutableException : Exception
+    {
+        public NotSVNExecutableException()
+        { }
+    }
+
     public class SettingsManager
     {
-        public string getSVNPathToAnalyse()
+        private string pathToSVNExe = string.Empty;
+        private string outputPath = string.Empty;
+        private string pathToAnalyse = string.Empty;
+
+        public string PathToSVNExe
         {
-			string svnPath = @"C:\";
-			if ((Directory.Exists(svnPath)) || File.Exists(svnPath))
-				return svnPath;
-			else
-				throw new FileNotFoundException();
+            get
+            {
+                return pathToSVNExe;
+            }
+            set
+            {
+                if (!(File.Exists(value)))
+                    throw new FileNotFoundException();
+
+                if (!(value.ToUpper().Contains("SVN.EXE")))
+                    throw new NotSVNExecutableException();
+
+                pathToSVNExe = value;
+            }
         }
 
-        public string getOutputPath()
+        public string OutputPath
         {
-			string outputPath = @"C:\";
-			if ((Directory.Exists(outputPath)))
-				return outputPath;
-			else
-				throw new FileNotFoundException();
+            get
+            {
+                return outputPath;
+            }
+            set
+            {
+                if (!(Directory.Exists(value)))
+                    throw new FileNotFoundException();
+
+                outputPath = value;
+            }
         }
+
+        public string PathToAnalyse
+        {
+            get
+            {
+                return pathToAnalyse;
+            }
+            set
+            {
+                if (! ( (Directory.Exists(value)) || ((File.Exists(value))) ))
+                    throw new FileNotFoundException();
+
+                pathToAnalyse = value;
+            }
+        }
+
     }
 }

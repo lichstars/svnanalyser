@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SVNAnalyser.Core;
+using System.Configuration;
 
 namespace SVNAnalyser
 {
@@ -11,15 +12,15 @@ namespace SVNAnalyser
         static void Main(string[] args)
         {
             SettingsManager settingsManager = new SettingsManager();
+            settingsManager.PathToSVNExe = ConfigurationManager.AppSettings["unitTest_pathToSVN"].ToString();
+            settingsManager.PathToAnalyse = ConfigurationManager.AppSettings["unitTest_workingCopyFolder"].ToString();
+            settingsManager.OutputPath = ConfigurationManager.AppSettings["unitTest_outputFolder"].ToString();
+
             Analyser analyser = new Analyser();
             Exporter exporter = new Exporter();
 
-            string svnPath = settingsManager.getSVNPathToAnalyse();
-            string outputPath = settingsManager.getOutputPath();
-
-            analyser.analyse(svnPath);
-
-            exporter.asZingChart(outputPath, null);
+            analyser.analyse(settingsManager.PathToAnalyse);
+            exporter.asZingChart(settingsManager.OutputPath, null);
             
 			Console.WriteLine("Complete. Press any key to exit.");
 

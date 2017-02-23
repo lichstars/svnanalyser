@@ -13,27 +13,33 @@ namespace SVNAnalyser.Core
     {
         public bool analyse(string path)
         {
-			//string logPrefix = System.Reflection.MethodBase.GetCurrentMethod().ReflectedType.Name + "." + System.Reflection.MethodBase.GetCurrentMethod().Name + " : ";
+            bool success = true;
+            try
+            {                
+                string arguments = "blame " + path + " --xml";
 
-			bool success = true;
-			string arguments = "blame " + path + " --xml";
+                Process pProcess = new Process();
+                pProcess.StartInfo.FileName = path;
+                pProcess.StartInfo.Arguments = arguments;
+                pProcess.StartInfo.UseShellExecute = false;
+                pProcess.StartInfo.RedirectStandardOutput = true;
+                pProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden; //System.Diagnostics.ProcessWindowStyle.Normal
+                pProcess.StartInfo.CreateNoWindow = true;
+                pProcess.Start();
+                string result = pProcess.StandardOutput.ReadToEnd();
+                pProcess.WaitForExit();
 
-			Process pProcess = new Process();
-			pProcess.StartInfo.FileName = @"C:\Program Files\TortoiseSVN\bin\svn.exe";
-			pProcess.StartInfo.Arguments = arguments;
-			pProcess.StartInfo.UseShellExecute = false;
-			pProcess.StartInfo.RedirectStandardOutput = true;
-			pProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden; //System.Diagnostics.ProcessWindowStyle.Normal
-			pProcess.StartInfo.CreateNoWindow = true;
-			pProcess.Start();
-			string result = pProcess.StandardOutput.ReadToEnd();
-			pProcess.WaitForExit();
+                if (!(result.Length > 0))
+                    success = false;
 
-			if (!(result.Length > 0))
-				success = false;
-
-			if (!(result.Contains("<blame>") && result.Contains("</blame>")))
-				success = false;
+                // If the <blame> tag is complete the action succeeded
+                if (!(result.Contains("<blame>") && result.Contains("</blame>")))
+                    success = false;
+            }
+            catch (Exception e)
+            {
+                success = false;
+            }
 
 			return success;
         }

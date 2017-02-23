@@ -5,6 +5,8 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SVNAnalyser.Core;
 using System.IO;
+using System.Configuration;
+using System.Diagnostics;
 
 namespace SVNAnalyser.Tests
 {
@@ -30,7 +32,7 @@ namespace SVNAnalyser.Tests
 
             plots.Add(plotData);
 
-            string path = @"C:\Apps\export.json";
+            string path = ConfigurationManager.AppSettings["unitTest_outputFolder"].ToString() + "export.json";
 
             exporter.asZingChart(path, plots);
 
