@@ -35,6 +35,7 @@ namespace SVNAnalyser.Core
             var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             string result = javaScriptSerializer.Serialize(graphset);
 
+            result = zingchart.renderJSON(result);
             using (StreamWriter sr = new StreamWriter(outputPath))
             {
                 sr.WriteLine(result);

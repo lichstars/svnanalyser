@@ -156,6 +156,14 @@ namespace SVNAnalyser.Core
             graphset.graphset = getCharts();
             return graphset;
         }
-        
+
+        // replace any json elements that required a hyphen but was not allowed when setting up class structure
+        public string renderJSON(string text)
+        {
+            text = text.Replace("fontsize", "font-size");
+            text = text.Replace("valuebox", "value-box");
+
+            return text;
+        }
     }
 }
