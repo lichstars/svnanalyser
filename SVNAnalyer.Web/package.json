@@ -1,0 +1,10 @@
+{
+  "name": "svnAnalyser",
+  "version": "1.0.0",
+  "description": "Utility to analyse code base",
+  "main": "main.js",
+  "scripts": {
+    "test": "node test.js",
+    "start": "node server.js"
+  }
+}
