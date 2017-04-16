@@ -39,6 +39,10 @@ function createClassCharts(data) {
 	}
 }
 
+function round(value, decimals) {
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
+
 function createRank(data) {
 	let hash = new Array();
 	let factor = 0;
@@ -52,7 +56,7 @@ function createRank(data) {
 	}
 	sortedHashKeys = getSortedKeys(hash);	
 	for(i=0; i<sortedHashKeys.length; i++) {
-		hash[sortedHashKeys[i]] = hash[sortedHashKeys[i]]/factor;
+		hash[sortedHashKeys[i]] = round(hash[sortedHashKeys[i]]/factor,2);
 	    html += sortedHashKeys[i] + ": " + hash[sortedHashKeys[i]] + "%<br />";
  	}		
 	document.getElementById("rank").innerHTML = html;
