@@ -35,12 +35,12 @@ namespace SVNAnalyser.Core
 
         public void calculateAndSetRatio(double totalLinesChanged, double ratioRemaining)
         {
-            ratioForThisPath = Math.Round(linesChanged / totalLinesChanged, 2);
+            ratioForThisPath = Math.Round(linesChanged / totalLinesChanged * 100, 2);
             double tempRatioRemaining = ratioRemaining - ratioForThisPath;
 
             if (tempRatioRemaining < 0)
             {
-                ratioForThisPath = 1 - ratioRemaining;
+                ratioForThisPath = 100 - ratioRemaining;
                 ratioRemaining = 0;
             }
         }
