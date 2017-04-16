@@ -102,6 +102,7 @@ namespace SVNAnalyser.Core
 
         private SettingsManager Settings { get; set; }
         public List<SVNBlame> Blames { get; set; } = new List<SVNBlame>();
+        public List<PlotData> PlotDataList { get; set; } = new List<PlotData>();
 
         public Analyser(SettingsManager settings)
         {
@@ -183,7 +184,6 @@ namespace SVNAnalyser.Core
                         }
                        
                         threadWorkers[i] = worker;
-
                         ThreadPool.QueueUserWorkItem(worker.ThreadPoolCallback, i);
 
                         line = stringReader.ReadLine();
@@ -220,8 +220,79 @@ namespace SVNAnalyser.Core
                 success = false;
                 Console.WriteLine(logPrefix + " exception : " + e.Message);
             }
-
 			return success;
+        }
+
+        public bool calculatePlotData()
+        {
+            bool success = true;
+            string logPrefix = System.Reflection.MethodBase.GetCurrentMethod().ReflectedType.Name + "." + System.Reflection.MethodBase.GetCurrentMethod().Name + " : ";
+
+            try
+            {
+                List<SVNAuthor> SVNAuthorList = new List<SVNAuthor>();
+
+                IEnumerable<string> distinctPaths = Blames.Select(x => x.path).Distinct();
+
+                foreach (var file in distinctPaths)
+                {
+                    List<SVNBlame> blamesForThisFile = Blames.FindAll(x => x.path == file);
+                    int linesChangedThisFile = blamesForThisFile.Sum(blame => blame.linesChanged);
+                    double ratioRemaining = 100.0;
+
+                    Console.Write(logPrefix + "Processing " + file + " : ");
+
+                    foreach (var svnBlame in blamesForThisFile)
+                    {
+                        // 1) Add to the list of authors if we haven't already for this author. 
+                        // The list of authors must be in the same order regardless of their input to any file, so they get the same pie chart colour in all displays
+
+                        if (SVNAuthorList.FindIndex(r => r.svnName == svnBlame.author.svnName) == -1)
+                            SVNAuthorList.Add(svnBlame.author);
+
+                        // 2) Calculate ratio
+                        svnBlame.calculateAndSetRatio(linesChangedThisFile, ratioRemaining);
+
+                        // 3) Log
+                        //Console.WriteLine(logPrefix + "processed SVN blame author: " + svnBlame.author.svnName + ", linesChanged: " + svnBlame.linesChanged + ", ratio : " + svnBlame.ratioForThisPath);
+                        Console.Write("|");
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine("Calculated ratios for " + distinctPaths.Count() + " files");
+
+                // 4) Group again and create PlotData
+                foreach (var file in distinctPaths)
+                {
+                    PlotData plotData = new PlotData();
+                    plotData.title = file;
+                    plotData.plots = new List<PlotData.Plot>();
+
+                    List<SVNBlame> blamesForThisFile = Blames.FindAll(x => x.path == file);
+
+                    foreach (SVNAuthor author in SVNAuthorList)
+                    {
+                        List<SVNBlame> blamesForThisAuthor = blamesForThisFile.FindAll(x => x.author == author);
+
+                        // There should only be one max author per file 
+                        foreach (SVNBlame blame in blamesForThisAuthor)
+                            plotData.plots.Add(new PlotData.Plot(blame.ratioForThisPath, blame.author.svnName));
+
+                        // But if the author doesn't exist for this file, add in a plot with 0% with this author's name
+                        if (blamesForThisAuthor.Count == 0)
+                            plotData.plots.Add(new PlotData.Plot(0, author.svnName));
+                    }
+                    PlotDataList.Add(plotData);
+                }
+
+                Console.WriteLine("Plot data created.");
+            }
+            catch (Exception e)
+            {
+                success = false;
+                Console.WriteLine(logPrefix + " exception : " + e.Message);
+            }
+            return success;
         }
     }
 }

@@ -11,24 +11,38 @@ namespace SVNAnalyser
     {
         static void Main(string[] args)
         {
-            SettingsManager settingsManager = new SettingsManager();
-            settingsManager.PathToSVNExe = ConfigurationManager.AppSettings["unitTest_pathToSVN"].ToString();
-            settingsManager.PathToAnalyse = ConfigurationManager.AppSettings["unitTest_workingCopyFolder"].ToString();
-            settingsManager.OutputPath = ConfigurationManager.AppSettings["unitTest_outputFolder"].ToString();
+            SettingsManager settings = new SettingsManager();
+            settings.PathToSVNExe = ConfigurationManager.AppSettings["unitTest_pathToSVN"].ToString();
+            settings.PathToAnalyse = ConfigurationManager.AppSettings["unitTest_workingCopyFolder"].ToString();
+            settings.OutputPath = ConfigurationManager.AppSettings["unitTest_outputFolder"].ToString();
 
-            Analyser analyser = new Analyser(settingsManager);
+            Analyser analyser = new Analyser(settings);
             Exporter exporter = new Exporter();
 
-            analyser.analyse();
+            bool success = analyser.analyse();
 
-            Console.WriteLine("Analysis complete. Press any key to continue.");
-            Console.ReadKey();
+            if (success)
+            {
+                Console.WriteLine("Analysis complete. Press any key to continue.");
+                Console.ReadKey();
 
-            exporter.asZingChart(settingsManager.OutputPath, null);
-            
-			Console.WriteLine("Complete. Press any key to exit.");
+                success = analyser.calculatePlotData();
 
-			Console.ReadKey();		
+                if (success)
+                {
+                    Console.WriteLine("Calculating plot data complete. Press any key to continue.");
+                    Console.ReadKey();
+
+                    exporter.asZingChart(settings.OutputPath + "export.json", analyser.PlotDataList);
+                    Console.WriteLine("Complete. Press any key to exit.");
+                }
+                else
+                    Console.WriteLine("Error during calculation of plot data. Press any key to continue.");
+            }
+            else
+                Console.WriteLine("Error during analysis. Press any key to continue.");
+
+            Console.ReadKey();		
         }
     }
 }

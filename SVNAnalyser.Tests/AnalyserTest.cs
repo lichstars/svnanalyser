@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Configuration;
 using SVNAnalyser.Core;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SVNAnalyser.Tests
 {
@@ -70,5 +72,81 @@ namespace SVNAnalyser.Tests
 
             Assert.IsFalse(invalidBlameExists);
         }
+
+        [TestMethod]
+        public void Analyser_CalculatePlotData_CompletesSuccessfullyOnTestBlames()
+        {
+            Analyser analyser = new Analyser();
+            List<SVNBlame> testBlameList = new List<SVNBlame>();
+
+            SVNAuthor author1 = new SVNAuthor("AUTHOR1", "Author One");
+            SVNAuthor author2 = new SVNAuthor("AUTHOR2", "Author Two");
+            SVNAuthor author3 = new SVNAuthor("AUTHOR3", "Author Three");
+
+            SVNBlame blame1 = new SVNBlame();
+            blame1.author = author1;
+            blame1.path = "PATH 1";
+            blame1.linesChanged = 100;
+
+            SVNBlame blame2 = new SVNBlame();
+            blame2.author = author2;
+            blame2.path = "PATH 1";
+            blame2.linesChanged = 100;
+
+            SVNBlame blame3 = new SVNBlame();
+            blame3.author = author3;
+            blame3.path = "PATH 1";
+            blame3.linesChanged = 100;
+
+            testBlameList.Add(blame1);
+            testBlameList.Add(blame2);
+            testBlameList.Add(blame3);
+
+            analyser.Blames = testBlameList;
+            bool success = analyser.calculatePlotData();
+
+            Assert.IsTrue(success);
+        }
+
+        [TestMethod]
+        public void Analyser_CalculatePlotData_BlameRatioEquals100()
+        {
+            Analyser analyser = new Analyser();
+            List<SVNBlame> testBlameList = new List<SVNBlame>();
+
+            SVNAuthor author1 = new SVNAuthor("AUTHOR1", "Author One");
+            SVNAuthor author2 = new SVNAuthor("AUTHOR2", "Author Two");
+            SVNAuthor author3 = new SVNAuthor("AUTHOR3", "Author Three");
+
+            SVNBlame blame1 = new SVNBlame();
+            blame1.author = author1;
+            blame1.path = "PATH 1";
+            blame1.linesChanged = 400;
+
+            SVNBlame blame2 = new SVNBlame();
+            blame2.author = author2;
+            blame2.path = "PATH 1";
+            blame2.linesChanged = 400;
+
+            SVNBlame blame3 = new SVNBlame();
+            blame3.author = author3;
+            blame3.path = "PATH 1";
+            blame3.linesChanged = 200;
+
+            testBlameList.Add(blame1);
+            testBlameList.Add(blame2);
+            testBlameList.Add(blame3);
+
+            analyser.Blames = testBlameList;
+            bool success = analyser.calculatePlotData();
+
+            double developerRatio = 0;
+            foreach (PlotData plotData in analyser.PlotDataList)
+                foreach (PlotData.Plot plot in plotData.plots)
+                    developerRatio = developerRatio + plot.percentage;
+
+            Assert.AreEqual(100, developerRatio);
+        }
     }
 }
+
