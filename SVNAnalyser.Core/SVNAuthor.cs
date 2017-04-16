@@ -22,10 +22,13 @@ namespace SVNAnalyser.Core
         }
         public bool Equals(SVNAuthor other)
         {
-            return (this.svnName.Equals(other.svnName) && this.realName.Equals(other.realName));
+            if ((other as object) == null)
+                return false;
+            else
+                return (this.svnName.Equals(other.svnName) && this.realName.Equals(other.realName));
         }
         public static bool operator ==(SVNAuthor b1, SVNAuthor b2)
-        {
+        {            
             return b1.Equals(b2);
         }
         public static bool operator !=(SVNAuthor b1, SVNAuthor b2)

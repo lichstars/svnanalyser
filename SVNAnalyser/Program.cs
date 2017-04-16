@@ -20,6 +20,10 @@ namespace SVNAnalyser
             Exporter exporter = new Exporter();
 
             analyser.analyse();
+
+            Console.WriteLine("Analysis complete. Press any key to continue.");
+            Console.ReadKey();
+
             exporter.asZingChart(settingsManager.OutputPath, null);
             
 			Console.WriteLine("Complete. Press any key to exit.");

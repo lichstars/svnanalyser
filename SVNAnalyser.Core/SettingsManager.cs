@@ -16,6 +16,7 @@ namespace SVNAnalyser.Core
         private string pathToSVNExe = string.Empty;
         private string outputPath = string.Empty;
         private string pathToAnalyse = string.Empty;
+        public int ThreadPoolSize { get; set; }  = Int32.Parse(ConfigurationManager.AppSettings["threadPoolSize"].ToString());
 
         public string PathToSVNExe
         {

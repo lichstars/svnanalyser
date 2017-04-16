@@ -44,6 +44,15 @@ namespace SVNAnalyser.Core
                 ratioRemaining = 0;
             }
         }
+        
+        public bool isValid()
+        {
+           if (author== null)
+                return false;
+            else if ((path == null) || (path == String.Empty))
+                return false;
 
+            return true;
+        }
     }
 }
