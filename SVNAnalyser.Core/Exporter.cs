@@ -33,6 +33,7 @@ namespace SVNAnalyser.Core
             ZingChart.Graphset graphset = zingchart.getGraphSet();
             
             var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            javaScriptSerializer.MaxJsonLength = Int32.MaxValue;
             string result = javaScriptSerializer.Serialize(graphset);
 
             result = zingchart.renderJSON(result);
