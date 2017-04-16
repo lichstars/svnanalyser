@@ -16,10 +16,10 @@ namespace SVNAnalyser
             settingsManager.PathToAnalyse = ConfigurationManager.AppSettings["unitTest_workingCopyFolder"].ToString();
             settingsManager.OutputPath = ConfigurationManager.AppSettings["unitTest_outputFolder"].ToString();
 
-            Analyser analyser = new Analyser();
+            Analyser analyser = new Analyser(settingsManager);
             Exporter exporter = new Exporter();
 
-            analyser.analyse(settingsManager.PathToAnalyse);
+            analyser.analyse();
             exporter.asZingChart(settingsManager.OutputPath, null);
             
 			Console.WriteLine("Complete. Press any key to exit.");

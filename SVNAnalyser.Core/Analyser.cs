@@ -11,15 +11,27 @@ namespace SVNAnalyser.Core
 {
     public class Analyser
     {
-        public bool analyse(string path)
+        private SettingsManager Settings { get; set; }
+
+        public Analyser(SettingsManager settings)
+        {
+            this.Settings = settings;
+        }
+
+        public Analyser()
+        {
+
+        }
+
+        public bool analyse()
         {
             bool success = true;
             try
             {                
-                string arguments = "blame " + path + " --xml";
+                string arguments = "blame " + Settings.PathToAnalyse + " --xml";
 
                 Process pProcess = new Process();
-                pProcess.StartInfo.FileName = path;
+                pProcess.StartInfo.FileName = Settings.PathToSVNExe;
                 pProcess.StartInfo.Arguments = arguments;
                 pProcess.StartInfo.UseShellExecute = false;
                 pProcess.StartInfo.RedirectStandardOutput = true;

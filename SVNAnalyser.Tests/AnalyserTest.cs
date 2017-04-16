@@ -7,32 +7,31 @@ namespace SVNAnalyser.Tests
 {
     [TestClass]
     public class AnalyserTest
-    {
+    {  
         [TestMethod]
         public void Analyser_WillReturnTrue_WhenAnalyseWorkingCopy()
         {
-            string pathToAnalyse = ConfigurationManager.AppSettings["unitTest_workingCopyFolder"].ToString();
-			Analyser analyser = new Analyser();
-			bool success = analyser.analyse(pathToAnalyse);
-			Assert.AreEqual(success, true);
+            SettingsManager settings = new SettingsManager();
+            settings.PathToAnalyse = ConfigurationManager.AppSettings["unitTest_workingCopyFolder"].ToString();
+            settings.PathToSVNExe = ConfigurationManager.AppSettings["unitTest_pathToSVN"].ToString();
+            Analyser analyser = new Analyser(settings);
+
+			bool success = analyser.analyse();
+
+            Assert.AreEqual(success, true);
         }
 
 		[TestMethod]
 		public void Analyser_WillReturnFalse_WhenAnalyseNotAWorkingCopy()
 		{
-            string pathToAnalyse = @"C:\Temp";
-			Analyser analyser = new Analyser();
-			bool success = analyser.analyse(pathToAnalyse);
+            SettingsManager settings = new SettingsManager();
+            settings.PathToAnalyse = @"C:\Temp";
+            settings.PathToSVNExe = ConfigurationManager.AppSettings["unitTest_pathToSVN"].ToString();
+            Analyser analyser = new Analyser(settings);
+
+			bool success = analyser.analyse();
+
 			Assert.AreEqual(success, false);
 		}
-
-        [TestMethod]
-        public void Analyser_WillReturnFalse_WhenAnalyseNotAnExistingFolder()
-        {
-            string pathToAnalyse = @"C:\Bananas";
-            Analyser analyser = new Analyser();
-            bool success = analyser.analyse(pathToAnalyse);
-            Assert.AreEqual(success, false);
-        }
     }
 }

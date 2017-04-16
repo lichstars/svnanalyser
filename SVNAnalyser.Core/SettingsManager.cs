@@ -65,5 +65,14 @@ namespace SVNAnalyser.Core
             }
         }
 
+        public SettingsManager(string pathToSVNExe, string pathToAnalyse, string outputPath)
+        {
+            this.PathToSVNExe = pathToSVNExe;
+            this.PathToAnalyse = pathToAnalyse;
+            this.OutputPath = outputPath;
+        }
+
+        public SettingsManager()
+        { }
     }
 }
