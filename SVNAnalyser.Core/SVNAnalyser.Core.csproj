@@ -48,6 +48,8 @@
     <Compile Include="PlotData.cs" />
     <Compile Include="Exporter.cs" />
     <Compile Include="SettingsManager.cs" />
+    <Compile Include="SVNAuthor.cs" />
+    <Compile Include="SVNBlame.cs" />
     <Compile Include="ZingChart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

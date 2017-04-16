@@ -12,6 +12,7 @@ namespace SVNAnalyser.Core
     public class Analyser
     {
         private SettingsManager Settings { get; set; }
+        private string Result { get; set; }
 
         public Analyser(SettingsManager settings)
         {
@@ -20,7 +21,6 @@ namespace SVNAnalyser.Core
 
         public Analyser()
         {
-
         }
 
         public bool analyse()
@@ -38,14 +38,14 @@ namespace SVNAnalyser.Core
                 pProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden; //System.Diagnostics.ProcessWindowStyle.Normal
                 pProcess.StartInfo.CreateNoWindow = true;
                 pProcess.Start();
-                string result = pProcess.StandardOutput.ReadToEnd();
+                Result = pProcess.StandardOutput.ReadToEnd();
                 pProcess.WaitForExit();
 
-                if (!(result.Length > 0))
+                if (!(Result.Length > 0))
                     success = false;
 
                 // If the <blame> tag is complete the action succeeded
-                if (!(result.Contains("<blame>") && result.Contains("</blame>")))
+                if (!(Result.Contains("<blame>") && Result.Contains("</blame>")))
                     success = false;
             }
             catch (Exception e)

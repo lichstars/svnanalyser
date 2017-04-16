@@ -51,6 +51,8 @@
     <Compile Include="ExporterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsManagerTest.cs" />
+    <Compile Include="SVNAuthorTest.cs" />
+    <Compile Include="SVNBlameTest.cs" />
     <Compile Include="ZingChartTest.cs" />
   </ItemGroup>
   <ItemGroup>
